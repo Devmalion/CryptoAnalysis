@@ -1,14 +1,12 @@
-
 import tweepy
-from tweepy import OAuthHandler
 import os
+from tweepy import OAuthHandler
 from os.path import join, dirname
 from dotenv import find_dotenv, load_dotenv
-from streamListener import StreamListener
+from StreamListener import StreamListener
 
-# TwitterClient i
+# TwitterClient handles the connection to the Twitter API using Tweepy and processes the streaming API
 class TwitterClient:
-
 
 	def __init__(self):
 
@@ -30,14 +28,11 @@ class TwitterClient:
 		except:
 			print("Connection To Twitter Failed")
 
- 
+
 	def create_stream(self, filters=[]):
-		stream_listener = StreamListener()
+		db_file = os.environ["db_file"]
+		stream_listener = StreamListener(db_file)
 		stream = tweepy.Stream(auth=self.api.auth, listener=stream_listener)
 		stream.filter(track=filters)
 
-		
-if __name__ == "__main__":
-	twitter_client = TwitterClient()
-	twitter_client.create_stream(['crypto', 'cryptocurrency', 'xrp', 'btc', 'bitcoin', 'ripple'])
 
