@@ -1,4 +1,4 @@
-import TextBlob
+from textblob import TextBlob
 
 class Tweet:
 
@@ -13,7 +13,9 @@ class Tweet:
 
 
 	def analyze_sentiment(self):
-
+		blob = TextBlob(self.text)
+		self.sentiment = blob.sentiment
+		return sentiment
 
 
 	def __str__(self):
