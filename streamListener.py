@@ -17,6 +17,7 @@ class StreamListener(tweepy.StreamListener):
 			return
 
 		cursor = self.conn.cursor()
+		
 		# User Fields
 		user_id = status.user.id
 		name = status.user.screen_name
@@ -50,7 +51,7 @@ class StreamListener(tweepy.StreamListener):
 							  VALUES(?, ?, ?, ?, ?, ?, ?)''', (user_id, id, text, created, retweets, favorites, coords))
 		except:
 			print("Tweet could not be added to DB")
-			
+
 		self.conn.commit()
 
 
@@ -62,3 +63,4 @@ class StreamListener(tweepy.StreamListener):
 		def __del__(self):
 			self.conn.close()
 			super(StreamListener, self).__del__()
+
