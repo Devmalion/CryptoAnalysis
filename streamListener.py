@@ -11,6 +11,7 @@ class StreamListener(tweepy.StreamListener):
 		super(StreamListener, self).__init__()
 		self.conn = sqlite3.connect(db_file)
 
+
 	# Method override that processes each incoming tweet
 	def on_status(self, status):
 		if hasattr(status, 'retweeted_status'):
@@ -50,6 +51,7 @@ class StreamListener(tweepy.StreamListener):
 							  VALUES(?, ?, ?, ?, ?, ?)''', (user_id, name, description, user_created, followers, loc))
 		except:
 			print("User already in DB")
+
 		try:
 			cursor.execute('''INSERT INTO tweets(user_id, id, text, created_at, retweets, favorites, coords, polarity, subjectivity)
 							  VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)''', (user_id, id, text, created, retweets, favorites, coords, polarity, subjectivity))
