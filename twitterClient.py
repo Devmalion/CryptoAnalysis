@@ -36,3 +36,8 @@ class TwitterClient:
 		stream.filter(track=filters)
 
 
+	def sample_tweets(self, query):
+		
+
+
+

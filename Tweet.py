@@ -15,7 +15,7 @@ class Tweet:
 	def analyze_sentiment(self):
 		blob = TextBlob(self.text)
 		self.sentiment = blob.sentiment
-		return sentiment
+		return self.sentiment
 
 
 	def __str__(self):

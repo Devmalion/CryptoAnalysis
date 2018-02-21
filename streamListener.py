@@ -37,6 +37,10 @@ class StreamListener(tweepy.StreamListener):
 		coords = status.coordinates
 
 		status = Tweet(statusUser, id, text, created, retweets, favorites, coords)
+		status.analyze_sentiment()
+
+		polarity = status.sentiment.polarity
+		subjectivity = status.sentiment.subjectivity
 
 		print(statusUser)
 		print(status)
@@ -47,8 +51,8 @@ class StreamListener(tweepy.StreamListener):
 		except:
 			print("User already in DB")
 		try:
-			cursor.execute('''INSERT INTO tweets(user_id, id, text, created_at, retweets, favorites, coords)
-							  VALUES(?, ?, ?, ?, ?, ?, ?)''', (user_id, id, text, created, retweets, favorites, coords))
+			cursor.execute('''INSERT INTO tweets(user_id, id, text, created_at, retweets, favorites, coords, polarity, subjectivity)
+							  VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)''', (user_id, id, text, created, retweets, favorites, coords, polarity, subjectivity))
 		except:
 			print("Tweet could not be added to DB")
 
