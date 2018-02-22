@@ -55,6 +55,7 @@ class TwitterClient:
 		return self.api.statuses_lookup(tweet_ids)
 
 
+	# Looks up all tweets in the DB and updates their favorite and retweet counts
 	def backfill_tweets(self):
 		conn = sqlite3.connect(self.db_file)
 		cursor = conn.cursor()
@@ -65,7 +66,7 @@ class TwitterClient:
 
 		count = 0
 		search = []
-		
+
 		for row in rows:
 			search.append(row[STATUS_ID])
 			count += 1
