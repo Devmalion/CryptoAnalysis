@@ -49,9 +49,6 @@ class TwitterClient:
 		
 		return tweets
 
-	def find_tweet(self, tweet_id):
-		return self.api.statuses_lookup([tweet_id])
-
 
 	# Note the Twitter API only allows a max of 100 tweets to be looked up at a time
 	def find_tweets(self, tweet_ids):
@@ -65,6 +62,7 @@ class TwitterClient:
 		rows = cursor.fetchall()
 
 		STATUS_ID = 1
+
 		count = 0
 		search = []
 		updateDict = {}
@@ -77,7 +75,8 @@ class TwitterClient:
 				search = []
 				count = 0
 
-		self.update_tweets(self.find_tweets(search), conn)
+		if count > 0:
+			self.update_tweets(self.find_tweets(search), conn)
 
 
 	def update_tweets(self, tweets, conn):
