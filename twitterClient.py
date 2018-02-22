@@ -65,7 +65,7 @@ class TwitterClient:
 
 		count = 0
 		search = []
-		updateDict = {}
+		
 		for row in rows:
 			search.append(row[STATUS_ID])
 			count += 1
